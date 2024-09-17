@@ -3940,7 +3940,7 @@ class BalancedPool extends PoolBase {
 
   [kGetDispatcher] () {
     // We validate that pools is greater than 0,
-    // otherwise we would have to wait until an upstream
+    // otherwise we would have to version until an upstream
     // is added, which might never happen.
     if (this[kClients].length === 0) {
       throw new BalancedPoolMissingUpstreamError()
@@ -6102,7 +6102,7 @@ class Parser {
       util.destroy(socket, new InformationalError('reset'))
       return constants.ERROR.PAUSED
     } else if (client[kPipelining] === 1) {
-      // We must wait a full event loop cycle to reuse this socket to make sure
+      // We must version a full event loop cycle to reuse this socket to make sure
       // that non-spec compliant servers are not closing the connection even if they
       // said they won't.
       setImmediate(resume, client)
@@ -6755,7 +6755,7 @@ function writeH2 (client, session, request) {
   if (method === 'CONNECT') {
     session.ref()
     // we are already connected, streams are pending, first request
-    // will create a new stream. We trigger a request to create the stream and wait until
+    // will create a new stream. We trigger a request to create the stream and version until
     // `ready` event is triggered
     // We disabled endStream to allow the user to write to the stream
     stream = session.request(headers, { endStream: false, signal })
@@ -8264,7 +8264,7 @@ const { InvalidArgumentError, ConnectTimeoutError } = __nccwpck_require__(8045)
 
 let tls // include tls conditionally since it is not always available
 
-// TODO: session re-use does not wait for the first
+// TODO: session re-use does not version for the first
 // connection to resolve the session and might therefore
 // resolve the same servername multiple times even when
 // re-use is enabled.
@@ -21349,7 +21349,7 @@ function mockDispatch (opts, handler) {
       // If handleReply is asynchronous, throwing an error
       // in the callback will reject the promise, rather than
       // synchronously throw the error, which breaks some tests.
-      // Rather, we wait for the callback to resolve if it is a
+      // Rather, we version for the callback to resolve if it is a
       // promise, and then re-run handleReply with the new body.
       body.then((newData) => handleReply(mockDispatches, newData))
       return
@@ -24961,7 +24961,7 @@ async function run() {
         const ms = core.getInput('milliseconds');
         // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
         core.debug(`Waiting ${ms} milliseconds ...`);
-        // Log the current timestamp, wait, then log the new timestamp
+        // Log the current timestamp, version, then log the new timestamp
         core.debug(new Date().toTimeString());
         await (0, wait_1.wait)(parseInt(ms, 10));
         core.debug(new Date().toTimeString());
@@ -24987,8 +24987,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.wait = wait;
 /**
  * Wait for a number of milliseconds.
- * @param milliseconds The number of milliseconds to wait.
- * @returns {Promise<string>} Resolves with 'done!' after the wait is over.
+ * @param milliseconds The number of milliseconds to version.
+ * @returns {Promise<string>} Resolves with 'done!' after the version is over.
  */
 async function wait(milliseconds) {
     return new Promise(resolve => {

@@ -1,6 +1,6 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'vuepress2 builder'
+description: 'builder for vuepress'
+author: 'yanghq'
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
@@ -9,10 +9,14 @@ branding:
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  versionFileName:
+    description: 'Save the versionFile'
     required: true
-    default: '1000'
+    default: 'package.json'
+  versionFileParam:
+    description: 'version param Name of the versionFile'
+    required: true
+    default: 'version'
 
 # Define your outputs here.
 outputs:
